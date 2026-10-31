@@ -183,6 +183,14 @@ describe('the periods a date filter lists', () => {
 		const value = { span: 'current month', anchor: '2026-05-10' }
 		expect(summaryParts({ column: posted, operator: 'within', value }).value).toBe('May 2026')
 	})
+
+	// @feature query.filter-relative-date
+	it('reads "2 weeks ago" as the week it lands in', () => {
+		const value = { span: 'current week', anchor: '2026-05-13' }
+		expect(summaryParts({ column: posted, operator: 'within', value }).value).toBe(
+			'Week of 10 May 2026',
+		)
+	})
 })
 
 describe('a fiscal year that starts after the 1st', () => {
