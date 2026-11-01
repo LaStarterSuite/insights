@@ -713,6 +713,13 @@ function valueSummary(filter: Filter): string {
 			if (!timespan) return ''
 			if (timespan.anchor && timespan.span === 'current day')
 				return formatDate(timespan.anchor)
+			// a week is no period unit, so an anchored one reads by its first day
+			if (timespan.anchor && timespan.span === 'current week') {
+				const shift = timespan.shift
+				const by = shift?.unit && spanUnitOf(shift.unit)
+				const anchor = by ? shiftDate(timespan.anchor, by, shift!.count || 0) : timespan.anchor
+				return __('Week of {0}', formatDate(dayjs(anchor).startOf('week').format(DATE_FORMAT)))
+			}
 			const period = periodOf(timespan)
 			if (period) return periodLabel(period.unit, period.start)
 			return spanLabel(timespan.span)
