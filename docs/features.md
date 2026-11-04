@@ -171,8 +171,9 @@ One row per thing a user can do or rely on. Slugs are `<area>.<feature>` in the 
 | charts.number-period-include-current | A user includes the in-progress period in a card's window. |
 | charts.number-period-from-dashboard | A card that states no Period reads a dashboard's `within` date filter as its Period, so its comparison steps back from the dashboard's span. Any other date filter only narrows its rows. |
 | charts.number-date-column | A user picks the date column a card's period and sparkline read. |
-| charts.number-target | A user measures a reading against a constant or a measure and the card states the gap. |
-| charts.number-comparison | A user compares a reading with the previous period, the same period last year, a constant or a measure, and the card states the change. |
+| charts.number-target | A user aims a reading at a constant or a measure, and the card prints the target beside the reading. |
+| charts.number-target-gap | A user prints a reading's gap to its target in the delta row, as a percent change or a difference, under a caption of their own. |
+| charts.number-comparison | A user compares a reading with the previous period or the same period last year, and the card states the change. |
 | charts.number-comparison-show | A user prints a comparison as a percent change or as a difference in the value's own units. |
 | charts.number-comparison-caption | A user writes a caption for the comparison row. |
 | charts.number-progress | A user draws a bar under a card for how far its reading has come: towards its target, or out of 100% for a percent. |
@@ -454,6 +455,7 @@ One row per thing a user can do or rely on. Slugs are `<area>.<feature>` in the 
 | data-store.slot-pool | No one user, guest address or site holds every data store slot while another user or site reads, though one alone may; a slot a killed worker held comes back when its lease ends, and a changed slot count applies at once. |
 | data-store.single-flight | Requests that ask the same query while it runs, from a reload, a second tab or another reader with the same rows, wait for that one run's answer instead of running it again, and hold no data store slot while they wait; a refresh joins a run in flight; if the run fails, each waiter runs it itself. |
 | data-store.cancel | A chart's query stops when its reader leaves the dashboard, changes its filters or reloads the page: a data store query is interrupted and a live MariaDB query killed, and its slot is freed; a reader stops only their own requests. |
+| data-store.request-cleanup | A request that does not use Insights does not load its data-source and analytics stack for connection cleanup, while Insights connections still close at the end of a request. |
 | data-store.time-limit | A data store query stops at Max Execution Time, and before the web tier's timeout would kill its worker, with the message a live query gives; the connection runs the next query. |
 | data-store.compaction | The store file is compacted without losing data, and small files are left alone. |
 | data-store.spill-cleanup | The weekly cleanup drops the spill folders of processes that stopped without closing the store. |
